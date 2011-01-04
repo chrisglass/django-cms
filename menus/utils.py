@@ -67,7 +67,8 @@ def get_extended_navigation_nodes(request, levels, ancestors, current_level, to_
             if anc.selected:
                 descendants = True
     if len(ancestors) and hasattr(ancestors[-1], 'ancestor'):
-        make_tree(request, items, 100, request.path, ancestors, descendants, current_level, 100, active_levels)
+        levels = 100
+        to_levels = 100
     make_tree(request, items, levels, request.path, ancestors, descendants, current_level, to_levels, active_levels)
     if mark_sibling:
         for item in items:
