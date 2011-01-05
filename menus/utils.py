@@ -63,8 +63,7 @@ def get_extended_navigation_nodes(request, levels, ancestors, current_level, to_
     items = func(request)
     descendants = False
     for anc in ancestors:
-        if hasattr(anc, 'selected'):
-            if anc.selected:
+        if hasattr(anc, 'selected') and anc.selected:
                 descendants = True
     if len(ancestors) and hasattr(ancestors[-1], 'ancestor'):
         levels = 100
