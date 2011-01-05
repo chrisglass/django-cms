@@ -5,6 +5,7 @@ from cms.tests.base import CMSTestCase
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template import Template
+from django.utils.translation import get_language 
 from menus.base import NavigationNode
 from menus.menu_pool import menu_pool, _build_nodes_inner_for_one_menu
 from menus.utils import mark_descendants, find_selected, cut_levels
@@ -496,3 +497,16 @@ class MenusTestCase(CMSTestCase):
     def test_25_utils_cut_levels(self):
         tree_nodes, flat_nodes = self._get_nodes()
         self.assertEqual(cut_levels(tree_nodes, 1), [flat_nodes[1]])
+        
+        
+class NavigationNodesTestCase(CMSTestCase):
+    
+    class Mock_NavigationNode(NavigationNode):
+        def __init__(self):
+            pass
+    
+    def test_01_remove_current_root_works(self):
+        nn = NavigationNodesTestCase.Mock_NavigationNode()
+        url = '/%s/this/should/stay/' % get_language()
+        result = nn._remove_current_root(url)
+        self.assertEqual(result,'/this/should/stay/')

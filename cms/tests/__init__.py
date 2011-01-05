@@ -3,6 +3,7 @@ from cms.tests.admin import AdminTestCase
 from cms.tests.apphooks import ApphooksTestCase
 from cms.tests.docs import DocsTestCase
 from cms.tests.menu import MenusTestCase
+from cms.tests.menu import NavigationNodesTestCase
 from cms.tests.navextender import NavExtenderTestCase
 from cms.tests.nonroot import NonRootCase
 from cms.tests.page import PagesTestCase

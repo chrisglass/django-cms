@@ -21,6 +21,11 @@ class Modifier(object):
         pass
     
 class NavigationNode(object):
+    '''
+    A NavigationNode is an abstract representation of where the user can 
+    navigate. Roughly put, this is what the menu will "point to" when it's 
+    generated.
+    '''
     title = None
     url = None
     attr = {}
@@ -32,7 +37,7 @@ class NavigationNode(object):
     visible = True
     
     def __init__(self, title, url, id, parent_id=None, parent_namespace=None, attr=None, visible=True):
-        self.children = [] # do not touch
+        self.children = [] # must be initialized to an empty list.
         self.title = title
         self.url = self._remove_current_root(url)
         self.id = id
@@ -46,9 +51,10 @@ class NavigationNode(object):
         return "<Navigation Node: %s>" % smart_str(self.title)
     
     def _remove_current_root(self, url):
+        '''If the url starts with current_root, remove current_root'''
         current_root = "/%s/" % get_language()
-        if url[:len(current_root)] == current_root:
-            url = url[len(current_root) - 1:]
+        if url.startswith(current_root):
+            url = url[len(current_root) - 1:] # -1 since we want to keep the '/'
         return url
     
     def get_menu_title(self):
